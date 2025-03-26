@@ -1,0 +1,14 @@
+{
+  "name": "weather-data-mcp-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "roman-ojha",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^5.8.2"
+  }
+}
