@@ -3,6 +3,9 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
+import express from "express";
+
+const app = express();
 
 const server = new McpServer({
   name: "Weather Data MCP Server",
@@ -73,6 +76,11 @@ server.tool(
 // So whatever above tool will take and return data in this format
 
 (async () => {
+  // NOTE that if you want to use StdIO then you need to have to runnable code in your local machine where you are calling it from like 'node index.js' which client will call the server
+  // https://modelcontextprotocol.io/docs/concepts/transports#standard-input%2Foutput-stdio
   const transport = new StdioServerTransport();
   await server.connect(transport);
+  // But in most of the case where you want to use third party tools where they will not provide you MCP server code then you can't use StdIO which only runs in your local machine throw terminal or any process
+  // In that case you have to use SSE Transport
+  // https://modelcontextprotocol.io/docs/concepts/transports#server-sent-events-sse
 })();
