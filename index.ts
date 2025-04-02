@@ -1,6 +1,7 @@
 // https://modelcontextprotocol.io/introduction
 
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 
 const server = new McpServer({
@@ -67,3 +68,11 @@ server.tool(
     };
   }
 );
+
+// Now we have to convert this server into Standard Input Output format
+// So whatever above tool will take and return data in this format
+
+(async () => {
+  const transport = new StdioServerTransport();
+  await server.connect(transport);
+})();
